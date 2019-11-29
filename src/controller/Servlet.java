@@ -116,8 +116,20 @@ public class Servlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			
+		} else if(option.equals("Create Flight")) {
+			String flightId = request.getParameter("flightId");
+			String flightName = request.getParameter("flightName");
+			String originCity = request.getParameter("originCity");
+			String destinationCity = request.getParameter("destinationCity");
+			String airportName = request.getParameter("airportName");
+			String airlineName = request.getParameter("airlineName");
+			String seatsPerRow = request.getParameter("seatsPerRow");
+			try {
+				manager.addFlight(flightId, flightName, originCity, destinationCity, airportName, airlineName, seatsPerRow);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		message = manager.getMessage();
 		request.setAttribute("message", message);

@@ -326,38 +326,39 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 	}
 
 	@Override
-	public void addFlight() throws SQLException {
+	public void addFlight(String flightId2, String flightName, String origin, String destination, 
+			String airport, String airline, String seatsPerRow) throws SQLException {
 		// create an SELECT SQL query
 		String query = "INSERT INTO flight (id, flight_name, origin, destination, airport, airline) "
 						+ "VALUES (?, ?, ?, ?, ?, ?)";
 		// giving unique id to the new flight
-		System.out.print("Enter unique ID of the flight: ");
-		int flightId = enterInteger();
+		//System.out.print("Enter unique ID of the flight: ");
+		int flightId = Integer.parseInt(flightId2);
 		// checking if flight ID already exists
 		if(!flightIdExists(flightId)){
-			System.out.print("Enter flight name: ");
-			String flightName = enterString();
+			//System.out.print("Enter flight name: ");
+			//String flightName = enterString();
 			// checking if flight name already exists
 			if(!flightNameExists(flightName.toUpperCase())){
-				System.out.print("Enter origin: ");
-				String origin = enterString();
+				//System.out.print("Enter origin: ");
+				//String origin = enterString();
 				// checking if origin location exists
 				if(locationExists(origin)){
-					System.out.print("Enter destination: ");
-					String destination = enterString();
+					//System.out.print("Enter destination: ");
+					//String destination = enterString();
 					// checking if destination location exists
 					if(locationExists(destination)){
-						System.out.print("Enter airport: ");
-						String airport = enterString();
+						//System.out.print("Enter airport: ");
+						//String airport = enterString();
 						// checking if airport exists and that origin valid for the airport
 						Airport enteredAirport = getAirport(airport.toUpperCase());
 						if(enteredAirport != null && originOfAirport(enteredAirport, origin)){
-							System.out.print("Enter airline: ");
-							String airline = enterString();
+							//System.out.print("Enter airline: ");
+							//String airline = enterString();
 							// checking if airline exists
 							if(getAirline(airline.toUpperCase()) != null){
-								System.out.println("Please enter number of seats per row");
-								int numSeatsInRow = enterInteger();
+								//System.out.println("Please enter number of seats per row");
+								int numSeatsInRow = Integer.parseInt(seatsPerRow);
 			// creating seats for the new created flight
 			createSeats(numSeatsInRow, flightId);
 			try (// java.sql.Statement
@@ -371,27 +372,27 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 					statement.setString(6, airline);
 					// execute the query
 					statement.executeUpdate();
-			System.out.println("Flight with id " + flightId + " and flight name " + flightName + " "
+		message = "Flight with id " + flightId + " and flight name " + flightName + " "
 									+ " origin " + origin + " and destination " + destination + " "
-									+ "added to the database.");
+									+ "added to the database.";
 										}	
 									} else {
-										System.out.println("Entered airline does not exist");
+										message = "Entered airline does not exist";
 									}
 								} else {
-									System.out.println("Entered airport does not exist");
+									message = "Entered airport does not exist";
 								}
 							} else {
-								System.out.println("Entered destination does not exist");
+								message = "Entered destination does not exist";
 							}
 						} else {
-							System.out.println("Entered origin does not exist");
+							message = "Entered origin does not exist";
 						}
 					} else {
-						System.out.println("Entered flight name already exist");
+						message = "Entered flight name already exist";
 					}
 				} else {
-					System.out.println("Entered flight ID already exist");
+					message = "Entered flight ID already exist";
 				}
 			}	
 	
