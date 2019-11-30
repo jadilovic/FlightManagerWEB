@@ -28,6 +28,7 @@
 
 <c:if test="${param.message != null}">
 <p><%= request.getAttribute("message") %></p>
+
 </c:if>
 
 </body>

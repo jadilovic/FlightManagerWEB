@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import dao.SystemManagerDAO;
+import dto.Airport;
+import javafx.scene.shape.Ellipse;
 
 /**
  * Servlet implementation class Servlet
@@ -98,6 +102,7 @@ public class Servlet extends HttpServlet {
 		// use connection	
 		System.out.println("Connection Established");
 		SystemManagerDAO manager = new SystemManagerDAO(connection);
+		PrintWriter out = response.getWriter();
 		
 		if(option.equals("Create Airport")) {
 			String airportName = request.getParameter("airportName");
@@ -126,6 +131,18 @@ public class Servlet extends HttpServlet {
 			String seatsPerRow = request.getParameter("seatsPerRow");
 			try {
 				manager.addFlight(flightId, flightName, originCity, destinationCity, airportName, airlineName, seatsPerRow);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// LIST OF AIRPORTS
+		} else if(option.equals("List Airports")) {
+			java.util.List<Airport> airports = null;
+			try {
+				airports = manager.getAllAirports();
+				for(Airport airport: airports)
+					System.out.println("Airport name: " + airport.getName() + " and city: " + airport.getCity());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

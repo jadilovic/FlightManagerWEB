@@ -182,6 +182,10 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 				listOfAirports.add(new Airport(rs.getString("name"), rs.getString("city")));
 			}
 		}
+		if(listOfAirports.size() > 0)
+			message = "List of airports";
+		else
+			message = "No airports in the database";
 		return listOfAirports;
 	}
 
@@ -380,7 +384,7 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 										message = "Entered airline does not exist";
 									}
 								} else {
-									message = "Entered airport does not exist";
+									message = "Entered airport does not exist or the orgine does not match";
 								}
 							} else {
 								message = "Entered destination does not exist";
