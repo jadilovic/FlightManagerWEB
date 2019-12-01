@@ -46,6 +46,10 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 	
 	// message from the database
 	private String message;
+	
+	public SystemManagerDAO() {
+		
+	}
 
 	public SystemManagerDAO(Connection conn) {
 		this.connection = conn;
@@ -192,7 +196,7 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 	@Override
 	public Airport getAirport(String airportName) throws SQLException {
 		// new airport object
-		Airport airport = null;
+		Airport airport = new Airport();
 		// create an SELECT SQL query
 		String query = "SELECT * FROM airport WHERE name = ?";
 		// create a new ResultSet
@@ -267,9 +271,9 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 	@Override
 	public void printAirport(Airport airport) {
 		if (airport != null) {
-			System.out.println("Airport name: " + airport.getName() + ", city: " + airport.getCity());
+			message = "Airport name: " + airport.getName() + ", city: " + airport.getCity();
 		} else {
-			System.out.println("No airport to print.");
+			message = "No airport to print.";
 		}
 	}
 	

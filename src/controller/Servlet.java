@@ -56,7 +56,7 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String selectedOption = request.getParameter("option");
 		String page;
-		if(selectedOption == null) {
+		if(selectedOption == null || selectedOption.equals("home")) {
 			page = "/home.jsp";
 		} else if(selectedOption.equals("Create Airport")) {
 			page = "/createairport.jsp";
@@ -143,6 +143,7 @@ public class Servlet extends HttpServlet {
 				airports = manager.getAllAirports();
 				for(Airport airport: airports)
 					System.out.println("Airport name: " + airport.getName() + " and city: " + airport.getCity());
+				request.setAttribute("airports", airports);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
