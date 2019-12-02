@@ -10,7 +10,7 @@
 </head>
 <body>
 <h3>List Airports Page</h3>
-<h5>Please click SUBMIT to list airports</h5>
+<h5>List of airports</h5>
 <sql:setDataSource var="ds" dataSource="jdbc/flights" />
 <sql:query dataSource="${ds}" sql="SELECT * FROM airport" var="results"></sql:query>
 <c:forEach var="airport" items="${results.rows}" >

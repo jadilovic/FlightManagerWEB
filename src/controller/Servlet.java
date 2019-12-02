@@ -138,16 +138,7 @@ public class Servlet extends HttpServlet {
 			
 			// LIST OF AIRPORTS
 		} else if(option.equals("List Airports")) {
-			java.util.List<Airport> airports = null;
-			try {
-				airports = manager.getAllAirports();
-				for(Airport airport: airports)
-					System.out.println("Airport name: " + airport.getName() + " and city: " + airport.getCity());
-				request.setAttribute("airports", airports);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 		}
 		message = manager.getMessage();
 		request.setAttribute("message", message);
