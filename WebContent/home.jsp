@@ -16,10 +16,12 @@
 	<input type="submit" name="option" value="Create Airline" />
 	<input type="submit" name="option" value="Create Flight" /><br/>
 	<br/>
+	
 	<input type="submit" name="option" value="List Airports" />
 	<input type="submit" name="option" value="List Airlines" />
 	<input type="submit" name="option" value="List Flights" /><br/>
 	<br/>
+	
 	<input type="submit" name="option" value="Find a Flight" />
 	<input type="submit" name="option" value="List Seats" />
 	<input type="submit" name="option" value="Exit Application" /><br/>
