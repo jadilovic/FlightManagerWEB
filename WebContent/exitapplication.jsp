@@ -9,5 +9,9 @@
 <body>
 <h3>Exit Application Page</h3>
 <h5>Please select to return to the home page</h5>
+<form action="${pageContext.request.contextPath}/Servlet" method="get">
+	<input type="hidden" name="option" value="home" />
+	<p><input type="submit" value="HOME" /></p>
+</form>
 </body>
 </html>

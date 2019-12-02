@@ -22,10 +22,17 @@
 	<sql:query dataSource="${ds}" sql="SELECT * FROM flight WHERE id=?" var="results">
 		<sql:param>${param.flightId}</sql:param>
 	</sql:query>
-	<c:set var="flights" scope="page" value="${results.rows[0]}" ></c:set>
-		<p>Flight id: ${flights.id}, Flight name: ${flights.flight_name}, 
-	Origin: ${flights.origin}, Destination: ${flights.destination}, 
-	Airport: ${flights.airport}, Airline: ${flights.airline}</p>
+	
+		<c:if test="${results.rows[0] != null}">
+			<c:set var="flights" scope="page" value="${results.rows[0]}" ></c:set>
+				<p>Flight id: ${flights.id}, Flight name: ${flights.flight_name}, 
+					Origin: ${flights.origin}, Destination: ${flights.destination}, 
+					Airport: ${flights.airport}, Airline: ${flights.airline}</p>
+			</c:if>
+
+		<c:if test="${results.rows[0] == null}">
+		<p>No available flights with the given flight ID ${param.flightId}</p>
+		</c:if>
 </c:if>
 
 <form action="${pageContext.request.contextPath}/Servlet">

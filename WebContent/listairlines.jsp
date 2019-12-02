@@ -16,7 +16,7 @@
 <c:forEach var="airline" items="${results.rows}" >
 	<p>${airline.name}</p>
 </c:forEach>
-<form action="/FlightManager/Servlet" method="get">
+<form action="${pageContext.request.contextPath}/Servlet" method="get">
 	<input type="hidden" name="option" value="home" />
 	<p><input type="submit" value="HOME" /></p>
 </form>

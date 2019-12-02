@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import dto.*;
+import javafx.scene.shape.Ellipse;
 
 /**
  * IMPLEMENTATION OF ALL DAO INTERFACES
@@ -168,7 +169,6 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 	
 	
 	// AIRPORT INTERFACE IMPLEMENTATION
-
 	@Override
 	public List<Airport> getAllAirports() throws SQLException {
 		// create list of all Airport objects
@@ -339,9 +339,12 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 		// create an SELECT SQL query
 		String query = "INSERT INTO flight (id, flight_name, origin, destination, airport, airline) "
 						+ "VALUES (?, ?, ?, ?, ?, ?)";
+		int flightId = 0;
 		// giving unique id to the new flight
 		//System.out.print("Enter unique ID of the flight: ");
-		int flightId = Integer.parseInt(flightId2);
+	if(flightId2.matches("[0-9]+")){
+		flightId = Integer.parseInt(flightId2);
+		
 		// checking if flight ID already exists
 		if(!flightIdExists(flightId)){
 			//System.out.print("Enter flight name: ");
@@ -402,7 +405,10 @@ public class SystemManagerDAO implements AirlineDAOInterface, AirportDAOInterfac
 				} else {
 					message = "Entered flight ID already exist";
 				}
-			}	
+			} else {
+				message = "Entered flight ID is not valid. It must be a number";
+		}
+	}	
 	
 	// checking if flight id exists
 	private boolean flightIdExists(int flightId) throws SQLException {

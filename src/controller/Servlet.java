@@ -72,7 +72,7 @@ public class Servlet extends HttpServlet {
 			page = "/listflights.jsp";
 		} else if (selectedOption.equals("Find a Flight")){
 			page = "/findflight.jsp";
-		}else if(selectedOption.equals("Book a Seat")) {
+		}else if(selectedOption.equals("List Seats")) {
 			page = "/bookseat.jsp";
 		} else if (selectedOption.equals("Exit Application")){
 			page = "/exitapplication.jsp";
@@ -81,7 +81,6 @@ public class Servlet extends HttpServlet {
 			String message = "Wrong option selected. Please try again.";
 			request.setAttribute("message", message);
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
@@ -102,25 +101,27 @@ public class Servlet extends HttpServlet {
 		// use connection	
 		System.out.println("Connection Established");
 		SystemManagerDAO manager = new SystemManagerDAO(connection);
-		PrintWriter out = response.getWriter();
 		
+		// CREATE AIRPORT
 		if(option.equals("Create Airport")) {
 			String airportName = request.getParameter("airportName");
 			String airportCity = request.getParameter("airportCity");
 			try {
 				manager.addAirport(airportName, airportCity);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+		// CREATE AIRLINE
 		} else if(option.equals("Create Airline")) {
 			String airlineName = request.getParameter("airlineName");
 			try {
 				manager.addAirline(airlineName);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+		// CREATE FLIGHT
 		} else if(option.equals("Create Flight")) {
 			String flightId = request.getParameter("flightId");
 			String flightName = request.getParameter("flightName");
@@ -132,14 +133,10 @@ public class Servlet extends HttpServlet {
 			try {
 				manager.addFlight(flightId, flightName, originCity, destinationCity, airportName, airlineName, seatsPerRow);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-			// LIST OF AIRPORTS
-		} else if(option.equals("List Airports")) {
-
+			}	
 		}
+		
 		message = manager.getMessage();
 		request.setAttribute("message", message);
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
